@@ -1,0 +1,10 @@
+
+Ubuntu to Serial Console on BBB
+
+In the VB window where your guest is running, 
+click on Devices -> USB -> Prolific Technology Inc (or whatever) USB device you want to share to your guest.
+Once you do that, Ubuntu will "see" the USB connection and automatically create the necessary /dev/ttyUSB0 device.
+
+Then you can use any of the normal tools to open up /dev/ttyUSB0.  Screen, minicom, gtkterm, etc.
+
+

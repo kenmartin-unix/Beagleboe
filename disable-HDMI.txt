@@ -1,0 +1,14 @@
+
+3-17-2020
+
+To disable HDMI video & HDMI audio at boot add
+
+sudo nano /boot/uEnv.txt
+
+enable_uboot_overlays=1          <=== ??
+disable_uboot_overlay_video=1
+disable_uboot_overlay_audio=1
+
+
+Control/O Enter Control/X
+

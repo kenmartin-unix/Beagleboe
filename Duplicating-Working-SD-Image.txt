@@ -1,0 +1,52 @@
+BBB New Duplicating Image
+
+# 3-25-2020 Ken. Thank you zmatt.
+
+# For example, if the source is /dev/mmcblk0 and destination is /dev/sda
+# Source being SD-Card in BBB and destination being hung off USB port
+
+# ===> Boot off eMMc <===
+ 
+# Shrink the source:
+
+# First become superuser
+
+sudo -s
+
+e2fsck -f /dev/mmcblk0p1
+
+resize2fs -M /dev/mmcblk0p1
+
+# ^^^ It will tell you how big the filesystem now is in 4K blocks. 
+# Divide by 1024 and round up to get the size of the filesystem in 4M blocks.
+ 
+echo 'start=8192,bootable' | sfdisk /dev/sda
+ 
+# Copy the filesystem to the destination. 
+# Fill in the correct number of 4M blocks for COUNT from above
+
+dd if=/dev/mmcblk0p1 of=/dev/sda1 bs=4M count=.... conv=fdatasync
+ 
+# Expand filesystem on destination
+
+resize2fs /dev/sda1
+ 
+# Copy bootloader
+
+dd if=/dev/mmcblk0 of=/dev/sda skip=1 seek=1 count=8191 conv=fdatasync
+ 
+# If you want to continue using the old filesystem, Expand it again
+
+resize2fs /dev/mmcblk0p1
+
+# ===> Remove externally mounted SD-Card on USB adapter
+
+# Give the new filesystem a new unique identifier if needed
+
+yes | tune2fs -U random /dev/sda1
+
+# If you want to reboot off internal SD-Card use command
+
+reboot
+
+# All done

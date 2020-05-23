@@ -1,0 +1,21 @@
+
+
+Relay Cape notes
+
+Initialize (relays to out) after an install
+
+echo 20  > /sys/class/gpio/export
+echo out > /sys/class/gpio/gpio20/direction
+echo out > /sys/class/gpio/gpio7/direction
+echo out > /sys/class/gpio/gpio112/direction
+echo out > /sys/class/gpio/gpio115/direction
+
+
+BBGW Note
+
+Well I set the default directory to 
+/sys/class/gpio
+and issued the command
+echo 112 > export
+and like magic the gpio112 appeared. It works now. Don't know why gpio112 was not automatically created however.
+

@@ -1,0 +1,36 @@
+
+First on BBB check 'route' and set default gateway address to 192.168.147.1.
+See postboot.sh script.
+
+From BBB;
+ping -c2 www.cnn.com if it continues to fail continue otherwise your done.
+
+Check P.C. Windows Host side
+GoTo Control Panel, Network and Sharing Center
+Click on Change Adapter Settings
+Hightlight (ONE Click) BBB USB Adapter (Your Adapter may have a different name)
+Click on Disable BBB USB Adapter
+Pause
+Click on Enable BBB USB Adapter
+Pause
+Respond OK to warning about change to 192.168.137.1 (Your display may differ)
+Double click on BBB USB Adapter
+Click Properities
+Click IPv4
+Click Properities
+==> Make sure IP Address is set to 192.168.147.1 (It's probably set to 192.168.137.1)
+And Preferred Name Server is set to 8.8.8.8
+If the address won't stick Click Advanced
+See if incorrect address is shown
+If it is Click on it and Click Remove then Click Save
+Click Save
+Click Save
+Double Click on WiFi Adapter
+Click Properities
+Click Sharing (On the top)
+Make sure BBB USB is Detected, If not select.
+Click Save
+Click Save
+Close all open Network windows
+
+From BBB try ping -c2 www.cnn.com again. It should work.
